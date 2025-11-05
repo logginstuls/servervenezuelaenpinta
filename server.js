@@ -86,30 +86,6 @@ app.post("/api/delete-session", (req, res) => {
   return res.json({ success: true, message: "Sesión eliminada correctamente" });
 });
 
-// ======================================================
-// 🔐 Inicio de sesión de administradores
-// ======================================================
-const ADMIN_USERS = [
-  { username: "admin", password: "12345" }, // Puedes agregar más
-  { username: "angel", password: "dior2025" }
-];
-
-app.post("/api/login", (req, res) => {
-  const { username, password } = req.body;
-
-  if (!username || !password) {
-    return res.status(400).json({ success: false, message: "Faltan credenciales" });
-  }
-
-  const user = ADMIN_USERS.find(u => u.username === username && u.password === password);
-  if (!user) {
-    return res.status(401).json({ success: false, message: "Credenciales inválidas" });
-  }
-
-  console.log(`🔑 Admin logueado: ${username}`);
-  return res.json({ success: true, message: "Inicio de sesión exitoso", username });
-});
-
 
 // ======================================================
 // 🟢 Ping para mantener vivo
@@ -121,3 +97,4 @@ app.get("/ping", (req, res) => res.send("pong"));
 // ======================================================
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`🚀 Servidor activo en puerto ${PORT}`));
+
